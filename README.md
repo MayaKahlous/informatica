@@ -1,4 +1,4 @@
-# informatica
+# Ferro Marketing (Reclame)
 Alle teamleden:
 - Manager: Maya (@MayaKahlous)
 - Chef Marketing: Anastasia/Livia (@
