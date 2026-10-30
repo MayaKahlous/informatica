@@ -1,6 +1,6 @@
 # informatica
 Alle teamleden:
-Manager: Maya (@MayaKahlous)
-Chef Marketing: Anastasia/Livia (@
-Chef Product: Alessandra (@alessandrakuilboer)
-Chef Kwaliteit: Anastasia/Livia (@
+- Manager: Maya (@MayaKahlous)
+- Chef Marketing: Anastasia/Livia (@
+- Chef Product: Alessandra (@alessandrakuilboer)
+- Chef Kwaliteit: Anastasia/Livia (@
