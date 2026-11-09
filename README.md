@@ -9,7 +9,7 @@
 
 ---
 
-## 📌 Over het Backend Product
+## 📌 Over ons bedrijf Ferro Marketing (Backend)
 
 De **Ferro Tandarts API** vormt de motor achter de digitale dienstverlening van de praktijk. Het systeem verwerkt veilig medische data, synchroniseert agendas en regelt de communicatie tussen patiënten en tandartsen.
 
