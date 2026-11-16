@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferro Marketing - Interactieve Tabel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4 md:p-8 font-sans text-gray-800">
 
+    <!-- Dit is de Frontend (De website die de bezoeker ziet) -->
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        
+        <!-- Header -->
+        <div class="bg-blue-600 text-white p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold">Ferro Marketing</h1>
+                <p class="text-blue-100 text-sm mt-1">Interactieve Opdrachten Spreadsheet</p>
+            </div>
+            <button onclick="voegRijToe()" class="bg-white text-blue-600 px-4 py-2 rounded font-bold shadow hover:bg-gray-100 transition w-full md:w-auto">
+                + Nieuwe Opdracht Toevoegen
+            </button>
+        </div>
+
+        <!-- De Interactieve Tabel -->
+        <div class="overflow-x-auto p-4">
+            <table class="w-full border-collapse min-w-[600px]">
+                <thead>
+                    <tr class="bg-gray-50 border-b-2 border-gray-300">
+                        <th class="p-3 text-left font-semibold text-gray-600">Naam Klant</th>
+                        <th class="p-3 text-left font-semibold text-gray-600">Bedrijfsnaam</th>
+                        <th class="p-3 text-left font-semibold text-gray-600">Dienst (Opties)</th>
+                        <th class="p-3 text-left font-semibold text-gray-600">Deadline</th>
+                        <th class="p-3 text-left font-semibold text-gray-600">Actie</th>
+                    </tr>
+                </thead>
+                <tbody id="spreadsheet-body">
+                    <!-- Standaard eerste rij -->
+                    <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                        <td class="p-2">
+                            <input type="text" placeholder="Naam..." class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                        </td>
+                        <td class="p-2">
+                            <input type="text" placeholder="Bedrijf..." class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                        </td>
+                        <td class="p-2">
+                            <select class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                                <option value="" disabled selected>Kies een dienst...</option>
+                                <option value="Poster">Poster Ontwerp</option>
+                                <option value="Logo">Logo Ontwerp</option>
+                                <option value="Reclame">Reclame Campagne</option>
+                            </select>
+                        </td>
+                        <td class="p-2">
+                            <input type="date" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none text-gray-600">
+                        </td>
+                        <td class="p-2 text-center">
+                            <button onclick="verwijderRij(this)" class="text-red-500 hover:text-red-700 font-bold px-2 py-1 rounded">X</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Dit is de logica (Soms verward met backend, maar dit is frontend JavaScript) -->
+    <script>
+        // 1. Functie om een nieuwe lege spreadsheet-rij toe te voegen
+        function voegRijToe() {
+            const tabelBody = document.getElementById('spreadsheet-body');
+            const nieuweRij = document.createElement('tr');
+            nieuweRij.className = "border-b border-gray-200 hover:bg-gray-50 transition";
+            
+            // De HTML structuur van de nieuwe invoervelden
+            nieuweRij.innerHTML = `
+                <td class="p-2">
+                    <input type="text" placeholder="Naam..." class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </td>
+                <td class="p-2">
+                    <input type="text" placeholder="Bedrijf..." class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                </td>
+                <td class="p-2">
+                    <select class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none bg-white">
+                        <option value="" disabled selected>Kies een dienst...</option>
+                        <option value="Poster">Poster Ontwerp</option>
+                        <option value="Logo">Logo Ontwerp</option>
+                        <option value="Reclame">Reclame Campagne</option>
+                    </select>
+                </td>
+                <td class="p-2">
+                    <input type="date" class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none text-gray-600">
+                </td>
+                <td class="p-2 text-center">
+                    <button onclick="verwijderRij(this)" class="text-red-500 hover:text-red-700 font-bold px-2 py-1 rounded">X</button>
+                </td>
+            `;
+            
+            tabelBody.appendChild(nieuweRij);
+        }
+
+        // 2. Functie om een rij te verwijderen als je op de X klikt
+        function verwijderRij(knop) {
+            const rij = knop.parentElement.parentElement;
+            rij.remove();
+        }
+    </script>
+</body>
+</html>
