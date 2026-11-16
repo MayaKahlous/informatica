@@ -1,2 +1,75 @@
-🚀 Welkom bij Ferro MarketingWij zijn Ferro Marketing, hét bureau voor creatieve en resultaatgerichte marketing. Wij helpen jouw bedrijf groeien door middel van ijzersterke visuele communicatie en doordachte campagnes.🏢 Wat wij doenBij Ferro Marketing staan we klaar om jouw merk naar een hoger niveau te tillen. Wij werken voor zowel particulieren als grote bedrijven en zijn gespecialiseerd in:🎨 Logo Ontwerp: Een uniek, strak en herkenbaar logo dat perfect past bij jouw visie.🖼️ Poster Ontwerp: Opvallende posters die je boodschap direct en krachtig overbrengen.📈 Reclame Campagnes: Complete strategieën om jouw doelgroep te bereiken en je omzet te verhogen.📞 Contact & Afspraak MakenWil je direct een opdracht bij ons plaatsen? Wij houden niet van lange e-mails, maar werken met een handig interactief opdrachten-systeem!Hieronder zie je een voorbeeld van ons dashboard.💻 HOE MAAK JE EEN AFSPRAAK?
-Om de echte, werkende interactieve tabel te gebruiken, open je het bestand index.html in deze repository! Je kunt daar direct je gegevens intypen en een dienst selecteren in ons systeem.Voorbeeld van ons Interactieve Systeem:Naam KlantBedrijfsnaamDienst (Opties)DeadlineActieTyp je naam...Typ je bedrijf...🔽 Kies: Poster / Logo / Reclame📅 Kies datum...❌Jan JansenVoorbeeld BVPoster Ontwerp12-12-2026[Verwijder]© 2026 Ferro Marketing - Ontwikkeld door onze Chef Product
+# Ferro — Tandartspraktijk Backend API 🦷
+
+> Het centrale backend-platform voor online afspraken, patiëntenbeheer en automatische herinneringen van **Tandartspraktijk Ferro**.
+
+![Status](https://img.shields.io/badge/Status-Actief-brightgreen)
+![Security](https://img.shields.io/badge/Privacy-AVG%2FGDPR%20Compliant-blue)
+![Backend](https://img.shields.io/badge/Backend-Node.js%20%2F%20Python-339933)
+![Database](https://img.shields.io/badge/Database-PostgreSQL-336791)
+
+---
+
+## 📌 Over ons bedrijf Ferro Marketing (Backend)
+
+De **Ferro Tandarts API** vormt de motor achter de digitale dienstverlening van de praktijk. Het systeem verwerkt veilig medische data, synchroniseert agendas en regelt de communicatie tussen patiënten en tandartsen.
+
+* **🗓️ Slim Afsprakenbeheer:** Real-time beschikbaarheid van behandelaren en stoelen ophalen en boeken.
+* **📲 Automatische Herinneringen:** Aanloggen en versturen van SMS- en e-mailnotificaties voor periodieke controles.
+* **🔒 Veilig Patiëntenportaal:** Geëncrypteerde gegevensuitwisseling voor behandelplannen en medische historie.
+* **💳 Facturatie & Declaratie:** Automatische koppeling met zorgverzekeraars en declaratiesystemen.
+
+---
+
+## ⚙️ Systeemarchitectuur
+
+```mermaid
+graph LR
+    Patiënt[Patiënt / Website] -->|HTTPS REST API| API[Ferro Backend Gateway]
+    API --> Auth[Authenticatie & Privacy Check]
+    API --> Agenda[Agenda & Boeking Service]
+    API --> Dossier[(Patiëntendossier DB)]
+    Agenda --> SMS[Notificatie Service]
+```
+
+---
+
+## 💻 API Demo (Afspraak Boeken)
+
+Een voorbeeld van een backend-aanroep waarmee een patiënt een controle-afspraak inplant:
+
+```bash
+curl -X POST [https://api.tandartspraktijkferro.nl/v1/afspraken](https://api.tandartspraktijkferro.nl/v1/afspraken) \
+  -H "Authorization: Bearer PATIENT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "patient_id": "P-98765",
+    "behandeling": "Periodieke Controle",
+    "datum": "2026-11-20T10:30:00Z"
+  }'
+```
+
+**Verwacht antwoord (JSON):**
+```json
+{
+  "status": 201,
+  "afspraak_id": "AFS-10294",
+  "behandelaar": "Dr. Ferro",
+  "bevestigde_tijd": "2026-11-20T10:30:00Z",
+  "herinnering_ingesteld": true
+}
+```
+
+---
+
+## 👥 Het Team (Ferro Marketing & Product)
+
+| Rol | Naam | GitHub Account |
+| :--- | :--- | :--- |
+| **Chef Kwaliteit** | Maya | [@MayaKahlous](https://github.com/MayaKahlous) |
+| **Chef Marketing** | Anastasia | [@AnastasiaIro](https://github.com/AnastasiaIro) |
+| **Chef Product** | Alessandra | [@alessandrakuilboer](https://github.com/alessandrakuilboer) |
+| **Manager** | Livia | [@LiviaUsername](https://github.com/LiviaUsername) |
+
+---
+
+📬 **Contact:** Vragen over de koppeling met tandheelkundige software? Neem contact op met het Ferro-ontwikkelteam.
