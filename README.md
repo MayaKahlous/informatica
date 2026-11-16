@@ -65,10 +65,10 @@ curl -X POST [https://api.tandartspraktijkferro.nl/v1/afspraken](https://api.tan
 
 | Rol | Naam | GitHub Account |
 | :--- | :--- | :--- |
-| **Manager** | Maya | [@MayaKahlous](https://github.com/MayaKahlous) |
+| **Chef Kwaliteit** | Maya | [@MayaKahlous](https://github.com/MayaKahlous) |
 | **Chef Marketing** | Anastasia | [@AnastasiaIro](https://github.com/AnastasiaIro) |
 | **Chef Product** | Alessandra | [@alessandrakuilboer](https://github.com/alessandrakuilboer) |
-| **Chef Kwaliteit** | Livia | [@LiviaUsername](https://github.com/LiviaUsername) |
+| **Manager** | Livia | [@LiviaUsername](https://github.com/LiviaUsername) |
 
 ---
 
