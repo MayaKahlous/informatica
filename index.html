@@ -1,98 +1,388 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tandartspraktijk - Maak Afspraak</title>
+    <title>Ferro Marketing | Doelgerichte B2B Marketing</title>
+    <meta name="description" content="Ferro Marketing helpt ambitieuze B2B-bedrijven in Nederland aan voorspelbare groei, gekwalificeerde leads en een onverwoestbare marktpositie.">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        ferro: {
+                            950: '#090E1A',
+                            900: '#0F172A',
+                            800: '#1E293B',
+                            700: '#334155',
+                            light: '#F8FAFC',
+                            accent: '#EA580C',
+                            accentHover: '#C2410C',
+                            accentSoft: '#FFF7ED',
+                        }
+                    },
+                    boxShadow: {
+                        'ferro': '0 20px 40px -15px rgba(15, 23, 42, 0.12)',
+                        'ferro-lg': '0 25px 50px -12px rgba(15, 23, 42, 0.25)',
+                        'accent-glow': '0 10px 25px -5px rgba(234, 88, 12, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Subtiel architectonisch rasterpatroon voor donkere B2B-secties */
+        .bg-ferro-grid {
+            background-color: #0F172A;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 15% 85%, rgba(30, 41, 59, 0.9) 0%, transparent 50%),
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+        }
+
+        /* Oplicht-animatie wanneer gebruiker via een CTA-knop naar het inschrijfformulier navigeert */
+        @keyframes formSpotlight {
+            0% {
+                box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.65), 0 25px 50px -12px rgba(15, 23, 42, 0.18);
+                border-color: #EA580C;
+                transform: scale(1);
+            }
+            35% {
+                box-shadow: 0 0 0 12px rgba(234, 88, 12, 0.22), 0 25px 50px -12px rgba(234, 88, 12, 0.25);
+                border-color: #EA580C;
+                transform: scale(1.012);
+            }
+            100% {
+                box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.12);
+                border-color: #E2E8F0;
+                transform: scale(1);
+            }
+        }
+
+        .highlight-pulse {
+            animation: formSpotlight 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Smooth fade-in voor tabbladen */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-case-enter {
+            animation: fadeSlideUp 0.35s ease-out forwards;
+        }
+    </style>
 </head>
-<body class="bg-teal-50 font-sans text-gray-800 min-h-screen p-6">
+<body class="bg-ferro-light text-slate-800 antialiased selection:bg-ferro-accent selection:text-white">
 
-    <main class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-xl border-t-4 border-teal-500 mt-10">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Tandartspraktijk De Glimlach</h1>
-        <p class="text-lg text-gray-600 mb-8">Maak online een afspraak. Deze wordt direct in ons systeem (Google Sheets) gezet.</p>
-        
-        <form id="aanvraagFormulier" onsubmit="verstuurNaarGoogleSheets(event)" class="space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Naam Patiënt</label>
-                    <input type="text" id="veld-naam" required class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 outline-none">
+    <!-- ===================================================================== -->
+    <!-- 1. COMPACTE STICKY NAVIGATIEBALK                                      -->
+    <!-- ===================================================================== -->
+    <header class="sticky top-0 z-50 bg-ferro-900/95 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="flex items-center justify-between h-16 sm:h-18">
+                <!-- Logo: Geometrisch schild in koper-oranje + Ferro Marketing -->
+                <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
+                    <div class="w-9 h-9 rounded-xl bg-ferro-accent flex items-center justify-center shadow-accent-glow group-hover:bg-ferro-accentHover transition-colors">
+                        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M12 2L4 5.5V11.5C4 16.85 7.41 21.82 12 23C16.59 21.82 20 16.85 20 11.5V5.5L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M9 8.5H15.5M9 12.5H14M9 8.5V16.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="font-display font-extrabold text-white tracking-wide text-base sm:text-lg">
+                        Ferro <span class="text-ferro-accent">Marketing</span>
+                    </span>
+                </a>
+
+                <!-- Rechts: Ankerlinks & Primaire Inschrijven-knop -->
+                <nav class="flex items-center gap-4 sm:gap-7" aria-label="Hoofdnavigatie">
+                    <a href="#diensten" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                        Diensten
+                    </a>
+                    <a href="#inschrijven"
+                       onclick="navigateToSignup(); return false;"
+                       class="hidden sm:inline-block text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                        Inschrijven
+                    </a>
+                    <button type="button"
+                            onclick="navigateToSignup()"
+                            class="inline-flex items-center gap-1.5 bg-ferro-accent hover:bg-ferro-accentHover text-white font-semibold text-sm px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl shadow-accent-glow transition-all cursor-pointer">
+                        <span>Inschrijven</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===================================================================== -->
+        <!-- 2. COMPACTE HERO-SECTIE                                               -->
+        <!-- ===================================================================== -->
+        <section class="bg-ferro-grid text-white py-16 sm:py-24 border-b border-slate-800">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6">
+                <!-- Pill-badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-slate-700 text-xs sm:text-sm font-semibold text-orange-400">
+                    <span class="w-2 h-2 rounded-full bg-ferro-accent"></span>
+                    <span>B2B Marketing voor Bedrijven</span>
                 </div>
-                <div>
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Telefoonnummer</label>
-                    <input type="tel" id="veld-telefoon" required class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 outline-none">
+
+                <!-- Hoofdkop -->
+                <h1 class="font-display font-extrabold text-3xl sm:text-5xl leading-tight tracking-tight text-white">
+                    Doelgerichte marketing voor ambitieuze B2B-bedrijven.
+                </h1>
+
+                <!-- Korte subtitel (2 zinnen) -->
+                <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                    Ferro Marketing versterkt jouw merk en zorgt voor structurele zichtbaarheid bij zakelijke beslissers. Schrijf jouw bedrijf vandaag nog vrijblijvend in.
+                </p>
+
+                <!-- CTA Knoppen -->
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                    <button type="button"
+                            onclick="navigateToSignup()"
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ferro-accent hover:bg-ferro-accentHover text-white font-bold text-base px-7 py-3.5 rounded-xl shadow-accent-glow hover:-translate-y-0.5 transition-all cursor-pointer">
+                        <span>Schrijf je in</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </button>
+
+                    <a href="#diensten"
+                       class="w-full sm:w-auto inline-flex items-center justify-center bg-ferro-800 hover:bg-slate-700 text-slate-100 font-semibold text-base px-7 py-3.5 rounded-xl border border-slate-700 transition-colors">
+                        Onze diensten
+                    </a>
                 </div>
             </div>
+        </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="md:col-span-1">
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Behandeling</label>
-                    <select id="veld-behandeling" required class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 outline-none bg-white">
-                        <option value="" disabled selected>Kies...</option>
-                        <option value="Controle">Controle</option>
-                        <option value="Spoed">Spoed / Kiespijn</option>
-                    </select>
+        <!-- ===================================================================== -->
+        <!-- 3. COMPACTE DIENSTEN-SECTIE (#diensten)                               -->
+        <!-- ===================================================================== -->
+        <section id="diensten" class="scroll-mt-16 py-16 sm:py-20 bg-ferro-light border-b border-slate-200/80">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6">
+                <div class="text-center max-w-xl mx-auto mb-12">
+                    <span class="inline-block text-xs font-bold uppercase tracking-widest text-ferro-accent bg-ferro-accentSoft px-3 py-1 rounded-full border border-orange-200/80 mb-3">
+                        Wat wij doen
+                    </span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-ferro-900 tracking-tight">
+                        Onze B2B-marketingdiensten
+                    </h2>
                 </div>
-                <div class="md:col-span-1">
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Datum</label>
-                    <input type="date" id="veld-datum" required class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 outline-none">
-                </div>
-                <div class="md:col-span-1">
-                    <label class="block text-sm font-bold text-gray-700 mb-1">Tijdstip</label>
-                    <input type="time" id="veld-tijd" required class="w-full p-3 border border-gray-300 rounded focus:ring-2 focus:ring-teal-500 outline-none">
+
+                <!-- 3 Strakke Dienstenkaarten -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Kaart 1 -->
+                    <article class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-sm hover:shadow-ferro hover:border-orange-300 transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="w-11 h-11 rounded-xl bg-ferro-900 text-ferro-accent flex items-center justify-center mb-5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2L4 5.5V11.5C4 16.85 7.41 21.82 12 23C16.59 21.82 20 16.85 20 11.5V5.5L12 2Z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-ferro-900 mb-2">
+                                B2B Merkpositionering
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                                Een sterke en geloofwaardige uitstraling waarmee je opvalt in jouw zakelijke markt.
+                            </p>
+                        </div>
+                        <button type="button"
+                                onclick="navigateToSignup('B2B Merkpositionering')"
+                                class="inline-flex items-center gap-1.5 text-sm font-bold text-ferro-accent hover:text-ferro-accentHover transition-colors text-left cursor-pointer">
+                            <span>Aanmelden voor deze dienst &rarr;</span>
+                        </button>
+                    </article>
+
+                    <!-- Kaart 2 -->
+                    <article class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-sm hover:shadow-ferro hover:border-orange-300 transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="w-11 h-11 rounded-xl bg-ferro-900 text-ferro-accent flex items-center justify-center mb-5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-ferro-900 mb-2">
+                                LinkedIn &amp; Content
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                                Gerichte zichtbaarheid en vakinhoudelijke communicatie voor zakelijke doelgroepen.
+                            </p>
+                        </div>
+                        <button type="button"
+                                onclick="navigateToSignup('LinkedIn & Content')"
+                                class="inline-flex items-center gap-1.5 text-sm font-bold text-ferro-accent hover:text-ferro-accentHover transition-colors text-left cursor-pointer">
+                            <span>Aanmelden voor deze dienst &rarr;</span>
+                        </button>
+                    </article>
+
+                    <!-- Kaart 3 -->
+                    <article class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-sm hover:shadow-ferro hover:border-orange-300 transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="w-11 h-11 rounded-xl bg-ferro-900 text-ferro-accent flex items-center justify-center mb-5">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-ferro-900 mb-2">
+                                Website &amp; Campagnes
+                            </h3>
+                            <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                                Overzichtelijke zakelijke pagina's en campagnes die aanvragen opleveren.
+                            </p>
+                        </div>
+                        <button type="button"
+                                onclick="navigateToSignup('Website & Campagnes')"
+                                class="inline-flex items-center gap-1.5 text-sm font-bold text-ferro-accent hover:text-ferro-accentHover transition-colors text-left cursor-pointer">
+                            <span>Aanmelden voor deze dienst &rarr;</span>
+                        </button>
+                    </article>
                 </div>
             </div>
+        </section>
 
-            <div id="status-bericht" class="hidden font-bold p-3 rounded mt-4"></div>
+        <!-- ===================================================================== -->
+        <!-- 4. GOOGLE FORMULIER SECTIE (#inschrijven)                             -->
+        <!-- ===================================================================== -->
+        <section id="inschrijven" class="scroll-mt-16 py-16 sm:py-24 bg-white">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6">
+                <!-- Witte kaart met subtiele schaduw en embedded Google Formulier -->
+                <div id="signup-card" class="bg-white rounded-3xl border-2 border-slate-200/90 shadow-ferro overflow-hidden transition-all">
+                    
+                    <!-- Bovenbalk met gekozen dienst-hint en directe link naar nieuw tabblad -->
+                    <div class="px-5 py-4 sm:px-7 bg-ferro-light border-b border-slate-200/80 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-ferro-accent shrink-0"></span>
+                            <span id="selected-service-label" class="text-xs sm:text-sm font-semibold text-ferro-900">
+                                Aanmeldformulier &mdash; Ferro Marketing
+                            </span>
+                        </div>
 
-            <button type="submit" id="verzend-knop" class="w-full bg-teal-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-teal-700 transition mt-4">
-                Verstuur naar Backend (Sheets)
-            </button>
-        </form>
+                        <a href="https://docs.google.com/forms/d/12KFVX4-aJvfSOP1FgOoCrl-xwPDCVI5UnoZ9ufVKj5o/viewform"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-semibold text-ferro-accent hover:text-ferro-accentHover bg-white hover:bg-ferro-accentSoft px-3.5 py-2 rounded-xl border border-orange-200/90 shadow-xs transition-colors">
+                            <span>Open formulier in nieuw tabblad</span>
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Embedded Google Formulier (zonder dubbele randen) -->
+                    <div class="w-full bg-white">
+                        <iframe
+                            src="https://docs.google.com/forms/d/12KFVX4-aJvfSOP1FgOoCrl-xwPDCVI5UnoZ9ufVKj5o/viewform?embedded=true"
+                            title="Aanmeldformulier Ferro Marketing"
+                            class="w-full h-[820px] sm:h-[850px] border-0 block"
+                            loading="lazy">
+                            Laden…
+                        </iframe>
+                    </div>
+
+                    <!-- Subtiele onderbalk met alternatieve link voor mobiel/tablet -->
+                    <div class="px-5 py-3.5 sm:px-7 bg-ferro-light border-t border-slate-200/80 flex items-center justify-between text-xs text-slate-500">
+                        <span>Wordt het formulier niet goed weergegeven?</span>
+                        <a href="https://docs.google.com/forms/d/12KFVX4-aJvfSOP1FgOoCrl-xwPDCVI5UnoZ9ufVKj5o/viewform"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="font-semibold text-ferro-accent hover:text-ferro-accentHover underline underline-offset-2">
+                            Open formulier in nieuw tabblad &rarr;
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- ===================================================================== -->
+    <!-- 5. COMPACTE FOOTER                                                    -->
+    <!-- ===================================================================== -->
+    <footer class="bg-ferro-900 text-slate-300 border-t border-slate-800 py-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div class="space-y-1.5">
+                <a href="#" class="inline-flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-ferro-accent flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M12 2L4 5.5V11.5C4 16.85 7.41 21.82 12 23C16.59 21.82 20 16.85 20 11.5V5.5L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            <path d="M9 8.5H15.5M9 12.5H14M9 8.5V16.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <span class="font-display font-extrabold text-white tracking-wide text-base">
+                        Ferro <span class="text-ferro-accent">Marketing</span>
+                    </span>
+                </a>
+                <p class="text-xs sm:text-sm text-slate-400">
+                    B2B-marketingbureau voor sterke merkpositionering en zakelijke zichtbaarheid.
+                </p>
+            </div>
+
+            <div class="space-y-1 text-xs sm:text-sm sm:text-right">
+                <p>
+                    <a href="mailto:info@ferromarketing.nl" class="text-slate-200 hover:text-ferro-accent font-medium transition-colors">
+                        info@ferromarketing.nl
+                    </a>
+                </p>
+                <p class="text-slate-500">
+                    &copy; 2026 Ferro Marketing. Alle rechten voorbehouden.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT: SMOOTH SCROLL & FOCUS OP GOOGLE FORMULIER                 -->
+    <!-- ===================================================================== -->
     <script>
-        // BELANGRIJK: Plak hier de URL die je van Google Apps Script krijgt!
-        const GOOGLE_SCRIPT_URL = "PLAK_HIER_JE_GOOGLE_SCRIPT_URL";
+        /**
+         * Scrollt vloeiend naar #inschrijven, toont optioneel de gekozen dienst
+         * in de bovenbalk en laat de Google Formulier-kaart subtiel oplichten.
+         */
+        function navigateToSignup(selectedService = null) {
+            const serviceLabel = document.getElementById('selected-service-label');
+            if (serviceLabel) {
+                serviceLabel.textContent = selectedService
+                    ? `Aanmeldformulier — Interesse: ${selectedService}`
+                    : 'Aanmeldformulier — Ferro Marketing';
+            }
 
-        function verstuurNaarGoogleSheets(event) {
-            event.preventDefault();
-            
-            const knop = document.getElementById('verzend-knop');
-            const status = document.getElementById('status-bericht');
-            
-            knop.innerText = "Bezig met verzenden...";
-            knop.disabled = true;
+            const targetSection = document.getElementById('inschrijven');
+            const signupCard = document.getElementById('signup-card');
 
-            // Verzamel data
-            const data = {
-                naam: document.getElementById('veld-naam').value,
-                telefoon: document.getElementById('veld-telefoon').value,
-                behandeling: document.getElementById('veld-behandeling').value,
-                datum: document.getElementById('veld-datum').value,
-                tijd: document.getElementById('veld-tijd').value
-            };
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
 
-            // Stuur naar Google Sheets
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                status.classList.remove('hidden', 'bg-red-100', 'text-red-700');
-                status.classList.add('bg-green-100', 'text-green-700');
-                status.innerText = "Gelukt! De afspraak staat in de Google Sheets database.";
-                document.getElementById('aanvraagFormulier').reset();
-                knop.innerText = "Verstuur naar Backend (Sheets)";
-                knop.disabled = false;
-            })
-            .catch(error => {
-                status.classList.remove('hidden');
-                status.classList.add('bg-red-100', 'text-red-700');
-                status.innerText = "Fout bij verzenden. Heb je de Google Script URL goed ingevuld?";
-                knop.innerText = "Verstuur naar Backend (Sheets)";
-                knop.disabled = false;
-            });
+            if (signupCard) {
+                signupCard.classList.remove('highlight-pulse');
+                void signupCard.offsetWidth;
+                signupCard.classList.add('highlight-pulse');
+            }
         }
     </script>
 </body>
