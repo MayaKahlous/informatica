@@ -1,4 +1,5 @@
-function maakHtmlTemplate(titel, badgeTekst, badgeKleur, inhoudHtml) {
+// Gebouwd door [alessandrakuilboer]
+\function maakHtmlTemplate(titel, badgeTekst, badgeKleur, inhoudHtml) {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; background-color: #ffffff;">
       <div style="background-color: #1e293b; color: #ffffff; padding: 24px; text-align: center;">
